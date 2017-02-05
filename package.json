@@ -1,0 +1,25 @@
+{
+  "name": "spartug",
+  "version": "0.10.1",
+  "description": "The open-source Trello-like kanban",
+  "private": true,
+  "scripts": {
+    "lint": "eslint .; exit 0",
+    "test": "npm run --silent lint; exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/spartug/spartug.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/spartug/spartug/issues"
+  },
+  "homepage": "https://spartug.io",
+  "devDependencies": {
+    "eslint": "^2.0.0"
+  },
+  "dependencies": {
+    "xss": "^0.2.13"
+  }
+}
