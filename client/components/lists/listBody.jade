@@ -1,0 +1,321 @@
+template(name="listBody")
+  if isSuperAdmin
+    +listBodyBottom
+  +listBodyCenter 
+            
+template(name="listBodyBottom")
+  .list-body.js-perfect-scrollbar
+    .minicards.clearfix.js-minicards
+      if cards.count
+        +inlinedForm(autoclose=false position="top")
+          +addCardForm(listId=_id position="top")
+      each cards
+        a.minicard-wrapper.js-minicard(href=absoluteUrl
+          class="{{#if cardIsSelected}}is-selected{{/if}}"
+          class="{{#if MultiSelection.isSelected _id}}is-checked{{/if}}")
+          if MultiSelection.isActive
+            .materialCheckBox.multi-selection-checkbox.js-toggle-multi-selection(
+              class="{{#if MultiSelection.isSelected _id}}is-checked{{/if}}")
+          +minicard(this)
+      if currentUser.isBoardMember
+        +inlinedForm(autoclose=false position="bottom")
+          +addCardForm(listId=_id position="bottom")
+        else
+          a.open-minicard-composer.js-card-composer.js-open-inlined-form
+            i.fa.fa-plus
+            | {{_ 'add-card'}}
+            
+template(name="listBodyCenter")  
+    .Spartug-App--Tabs---ProfileProgram
+      .Spartug-App--Tabs---container
+        if onlyShowInformationTab
+          a.Spartug-App--Tabs---button.is-active(href="{{pathFor 'board' boardId=this.board._id  }}") Información
+        else
+          a.Spartug-App--Tabs---button(href="{{pathFor 'board' boardId=this.board._id  }}") Información
+        if onlyShowActivitiesTab
+          a.Spartug-App--Tabs---button.is-active(href="{{pathFor 'board' boardId=this.board._id  tab='activities' }}") Actividad
+        else
+          a.Spartug-App--Tabs---button(href="{{pathFor 'board' boardId=this.board._id  tab='activities' }}") Actividad
+        if onlyShowHalloffameTab
+          a.Spartug-App--Tabs---button.is-active(href="{{pathFor 'board' boardId=this.board._id  tab='halloffame' }}") Salón de la fama
+        else
+          a.Spartug-App--Tabs---button(href="{{pathFor 'board' boardId=this.board._id  tab='halloffame' }}") Salón de la fama
+      if onlyShowInformationTab
+        +informationTab
+      else if onlyShowActivitiesTab
+        +activityTab
+      else if onlyShowHalloffameTab
+        +halloffameTab
+    // end tab
+    
+template(name="listBodyAside") 
+  aside#page-sidebar-content
+    .sidebar-block.sidebar-accolades(data-sidebar-block='accolades')
+      #user-twitter-link.SpartugApp-element--Letter---BountyHackerCoin
+        | Fondo: 
+        span.SpartugApp-element--Letter---BountyHackerCoin----valueBBC 10000
+        span.SpartugApp-element--Letter---BountyHackerCoin----nameBBC BHC
+      #user-numbers-container
+        span#user-karma-label
+          | {{ this.board.cardCount  }}  
+          span(style='\
+          display: block;\
+          color: #828b98;\
+          font-family: "Lato", sans-serif;\
+          font-size: 12px;\
+          font-weight: 500;\
+          text-transform: uppercase;\
+          ') bugs
+        span.label-Reward
+          | $25 
+          i.icon-long-arrow-right
+          |  $100
+        span(style='\
+        display: block;\
+        color: #828b98;\
+        font-family: "Lato", sans-serif;\
+        font-size: 12px;\
+        font-weight: 500;\
+        text-transform: uppercase;\
+        ') Recompensa
+      #user-twitter-link
+        span.icon-users2
+        |  {{ this.board.memberCount  }} Participantes
+      #user-twitter-link.Checkprogram--NoReport             
+        if currentUser.hasReportsInBoard this.boardId
+          span.icon-check-circle
+          |  Ya has reportado
+        else
+          span.icon-check-circle
+          |  Aun no has reportado                 
+    if currentUser.isBoardMember
+      a.standard-button.report-bug(href="{{ pathFor 'list' boardId=this.boardId  slug=this.title }}")
+        span.icon-bug
+        |  Reportar bug
+    else
+      button#participar-user-button.standard-button.outline
+        span.icon-gavel
+        |  Participar ahora
+    .well
+      h4.sexy-lates Últimos recompensados
+      a(href='#urlOfHacker')
+        img.img-ask(src='https://www.gravatar.com/avatar/288ce55a011c709f4e17aef7e3c86c64?s=460', alt='fraph')
+      a(href='#urlOfHacker')
+        img.img-ask(src='https://www.gravatar.com/avatar/288ce55a011c709f4e17aef7e3c86c64?s=460', alt='fraph')
+      a(href='#urlOfHacker')
+        img.img-ask(src='https://www.gravatar.com/avatar/288ce55a011c709f4e17aef7e3c86c64?s=460', alt='fraph')
+      a(href='#urlOfHacker')
+        img.img-ask(src='https://www.gravatar.com/avatar/288ce55a011c709f4e17aef7e3c86c64?s=460', alt='fraph')
+      a(href='#urlOfHacker')
+        img.img-ask(src='https://www.gravatar.com/avatar/288ce55a011c709f4e17aef7e3c86c64?s=460', alt='fraph')
+      a(href='#urlOfHacker')
+        img.img-ask(src='https://www.gravatar.com/avatar/288ce55a011c709f4e17aef7e3c86c64?s=460', alt='fraph')
+      a(href='#urlOfHacker')
+        img.img-ask(src='https://www.gravatar.com/avatar/288ce55a011c709f4e17aef7e3c86c64?s=460', alt='fraph')
+      a(href='#urlOfHacker')
+        img.img-ask(src='https://www.gravatar.com/avatar/288ce55a011c709f4e17aef7e3c86c64?s=460', alt='fraph')
+      a(href='#urlOfHacker')
+        img.img-ask(src='https://www.gravatar.com/avatar/288ce55a011c709f4e17aef7e3c86c64?s=460', alt='fraph')
+      a(href='#urlOfHacker')
+        img.img-ask(src='https://www.gravatar.com/avatar/288ce55a011c709f4e17aef7e3c86c64?s=460', alt='fraph')
+      .SpartugApp-element--lineBottom
+        a.SpartugApp-element--Link---more(href='#url-allHackersTop')
+          | Ver todos los hackers 
+          i.icon-chevron-circle-right
+    .row.column.employ-related-section.compartir-redesProgram
+      .SpartugApp-ProfileProgram--elementsSocialShare
+        h3.SpartugApp-ProfileProgram--elementsSocialShare---text Comparte
+        a.SpartugApp-ProfileProgram--elementsSocialShare---twitter(href='https://twitter.com/spartug', title='Seguir en Twitter')
+        a.SpartugApp-ProfileProgram--elementsSocialShare---facebook(href='https://www.facebook.com/spartug', title='Seguir en Facebook')
+        a.SpartugApp-ProfileProgram--elementsSocialShare---googleplus(href='https://www.linkedin.com/company/spartug', title='Seguir en Google Plus')
+        a.SpartugApp-ProfileProgram--elementsSocialShare---linkedin(href='https://github.com/spartug', title='Ver nuestro Linkedin')
+
+template(name="informationTab")            
+    .SpartugApp-ProfileProgram--boxInformation
+        .SpartugApp-ProfileProgram--boxInformation---margin
+                      h3.SpartugApp-ProfileProgram--boxInformation---title Detalles
+                      .SpartugApp-define--TopHackerboxBBP
+                        h3.SpartugApp-define--TopHackerboxBBP---title
+                          span.SpartugApp-define--TopHackerboxBBP---TotalHackers
+                            span.SpartugApp-define--TopHackerboxBBP---TotalHackers----value 24
+                          |       Top Hacker
+                        .SpartugApp-define--TopHackerboxBBP---HackersList
+                          .SpartugApp-define--TopHackerboxBBP---Hacker
+                            a.SpartugApp-define--TopHackerboxBBP---Hacker----LinkProfile(href='#url-of-hacker')
+                            img.SpartugApp-define--TopHackerboxBBP---Hacker----Avatar(src='https://www.gravatar.com/avatar/288ce55a011c709f4e17aef7e3c86c64?s=460', alt='Fraph')
+                            .SpartugApp-define--TopHackerboxBBP---Hacker----DataUser
+                              p.SpartugApp-define--TopHackerboxBBP---Hacker----DataUser-points
+                                | 19
+                                span puntos
+                            .SpartugApp-define--TopHackerboxBBP---Hacker----DataUser-tooltip Fraph
+                          .SpartugApp-define--TopHackerboxBBP---Hacker
+                            a.SpartugApp-define--TopHackerboxBBP---Hacker----LinkProfile(href='#url-of-hacker')
+                            img.SpartugApp-define--TopHackerboxBBP---Hacker----Avatar(src='https://www.gravatar.com/avatar/288ce55a011c709f4e17aef7e3c86c64?s=460', alt='Fraph')
+                            .SpartugApp-define--TopHackerboxBBP---Hacker----DataUser
+                              p.SpartugApp-define--TopHackerboxBBP---Hacker----DataUser-points
+                                | 19
+                                span puntos
+                            .SpartugApp-define--TopHackerboxBBP---Hacker----DataUser-tooltip Fraph
+                          .SpartugApp-define--TopHackerboxBBP---Hacker
+                            a.SpartugApp-define--TopHackerboxBBP---Hacker----LinkProfile(href='#url-of-hacker')
+                            img.SpartugApp-define--TopHackerboxBBP---Hacker----Avatar(src='https://www.gravatar.com/avatar/288ce55a011c709f4e17aef7e3c86c64?s=460', alt='Fraph')
+                            .SpartugApp-define--TopHackerboxBBP---Hacker----DataUser
+                              p.SpartugApp-define--TopHackerboxBBP---Hacker----DataUser-points
+                                | 19
+                                span puntos
+                            .SpartugApp-define--TopHackerboxBBP---Hacker----DataUser-tooltip Fraph
+                          .SpartugApp-define--TopHackerboxBBP---Hacker
+                            a.SpartugApp-define--TopHackerboxBBP---Hacker----LinkProfile(href='#url-of-hacker')
+                            img.SpartugApp-define--TopHackerboxBBP---Hacker----Avatar(src='https://www.gravatar.com/avatar/288ce55a011c709f4e17aef7e3c86c64?s=460', alt='Fraph')
+                            .SpartugApp-define--TopHackerboxBBP---Hacker----DataUser
+                              p.SpartugApp-define--TopHackerboxBBP---Hacker----DataUser-points
+                                | 19
+                                span puntos
+                            .SpartugApp-define--TopHackerboxBBP---Hacker----DataUser-tooltip Fraph
+                          .SpartugApp-define--TopHackerboxBBP---Hacker
+                            a.SpartugApp-define--TopHackerboxBBP---Hacker----LinkProfile(href='#url-of-hacker')
+                            img.SpartugApp-define--TopHackerboxBBP---Hacker----Avatar(src='https://www.gravatar.com/avatar/288ce55a011c709f4e17aef7e3c86c64?s=460', alt='Fraph')
+                            .SpartugApp-define--TopHackerboxBBP---Hacker----DataUser
+                              p.SpartugApp-define--TopHackerboxBBP---Hacker----DataUser-points
+                                | 19
+                                span puntos
+                            .SpartugApp-define--TopHackerboxBBP---Hacker----DataUser-tooltip Fraph
+                        a.return.icon-chevron-right(box-color='yellow', href='dashboard.html')
+                    p
+                      | Defino a 
+                      strong SVP
+                      |  como un tipo de fallo el cual te permite saltar la validación de un método de pago en el transcurso del proceso ya sea antes o después de la validación, y este también lo puedes llamar bug de salto.
+                    .SpartugApp-ProfileProgram--boxInformation---margin
+                      h3.SpartugApp-ProfileProgram--boxInformation---title Targets
+                    .SpartugApp-ProfileProgram--boxInformation---targets
+                      ul.markdown
+                        li
+                          a.SpartugApp-element--Link(href='https://app.optimizely.com', target='_blank') https://mailchimp.com
+                        li
+                          a.SpartugApp-element--Link(href='https://app.optimizely.com', target='_blank') https://mailchimp.com
+                        li
+                          a.SpartugApp-element--Link(href='https://app.optimizely.com', target='_blank') https://mailchimp.com
+                    .SpartugApp-ProfileProgram--boxInformation---margin
+                      h3.SpartugApp-ProfileProgram--boxInformation---title Fuera del ámbito
+                    p
+                      | Por favor, abstenerse de acceder a la información privada (a fin de utilizar las cuentas de prueba), la realización de acciones que puedan afectar negativamente a los usuarios Mailchimp (correo no deseado, denegación de servicio), o el envío de informes de herramientas automatizadas sin verificarlos.
+                    p
+                      strong Web:
+                      |  los clientes mailchimp incrustar un pequeño fragmento de JavaScript en sus páginas web. Esta Javascript se sirve de un CDN. El javascript contiene la lógica para los experimentos. Esta es la parte más sensible de nuestro producto y estamos particularmente interesados ​​en las vulnerabilidades relacionadas con este fragmento.
+                    p Tipos de vulnerabilidades que califican para en el programa:
+                    ul.list-markdown
+                      li Cross-Site Scripting
+                      li SQL Injection
+                      li Remote Code Execution
+                      li Cross-Site Request Forgery
+                      li Directory Traversal
+                      li Information Disclosure
+                      li Content Spoofing
+                      li Unauthorized Access
+                      li Privilege Escalation
+                      li Provisioning Errors
+                  
+
+template(name="activityTab")            
+    .status-type
+      span.line
+      span.type-box--case Actividades recientes
+    ol.SpartugApp-define--Activitybbp(start='1')
+      +activities(mode="board")
+    
+template(name="halloffameTab")            
+    .status-type
+      span.line
+      span.type-box--case Hackers reconocidos
+    h4(style='\
+    color: #b2bac2;\
+    font-family: "Lato", sans-serif;\
+    font-weight: 400;\
+    margin: .71em 0 1em 0;\
+    ')
+      | ¡Gracias a los siguientes investigadores por informar importantes problemas de seguridad!
+    .hof-hackers
+      .cardH
+        span.positionH #2
+        img.circleH(src='https://www.gravatar.com/avatar/288ce55a011c709f4e17aef7e3c86c64?s=460')
+        a.text-upp(href='#username') jofpin
+        p.pointsH 12 puntos
+      .cardH
+        span.positionH #2
+        img.circleH(src='https://www.gravatar.com/avatar/288ce55a011c709f4e17aef7e3c86c64?s=460')
+        a.text-upp(href='#username') jofpin
+        p.pointsH 12 puntos
+      .cardH
+        span.positionH #2
+        img.circleH(src='https://www.gravatar.com/avatar/288ce55a011c709f4e17aef7e3c86c64?s=460')
+        a.text-upp(href='#username') jofpin
+        p.pointsH 12 puntos
+      .cardH
+        span.positionH #2
+        img.circleH(src='https://www.gravatar.com/avatar/288ce55a011c709f4e17aef7e3c86c64?s=460')
+        a.text-upp(href='#username') jofpin
+        p.pointsH 12 puntos
+      .cardH
+        span.positionH #2
+        img.circleH(src='https://www.gravatar.com/avatar/288ce55a011c709f4e17aef7e3c86c64?s=460')
+        a.text-upp(href='#username') jofpin
+        p.pointsH 12 puntos
+      .cardH
+        span.positionH #2
+        img.circleH(src='https://www.gravatar.com/avatar/288ce55a011c709f4e17aef7e3c86c64?s=460')
+        a.text-upp(href='#username') jofpin
+        p.pointsH 12 puntos
+      .cardH
+        span.positionH #2
+        img.circleH(src='https://www.gravatar.com/avatar/288ce55a011c709f4e17aef7e3c86c64?s=460')
+        a.text-upp(href='#username') jofpin
+        p.pointsH 12 puntos
+      .cardH
+        span.positionH #2
+        img.circleH(src='https://www.gravatar.com/avatar/288ce55a011c709f4e17aef7e3c86c64?s=460')
+        a.text-upp(href='#username') jofpin
+        p.pointsH 12 puntos
+
+    
+    
+template(name="listBody2")
+  .list-body.js-perfect-scrollbar
+    .minicards.clearfix.js-minicards
+      if cards.count
+        +inlinedForm(autoclose=false position="top")
+          +addCardForm(listId=_id position="top")
+      each cards
+        a.minicard-wrapper.js-minicard(href=absoluteUrl
+          class="{{#if cardIsSelected}}is-selected{{/if}}"
+          class="{{#if MultiSelection.isSelected _id}}is-checked{{/if}}")
+          if MultiSelection.isActive
+            .materialCheckBox.multi-selection-checkbox.js-toggle-multi-selection(
+              class="{{#if MultiSelection.isSelected _id}}is-checked{{/if}}")
+          +minicard(this)
+      if currentUser.isBoardMember
+        +inlinedForm(autoclose=false position="bottom")
+          +addCardForm(listId=_id position="bottom")
+        else
+          a.open-minicard-composer.js-card-composer.js-open-inlined-form
+            i.fa.fa-plus
+            | {{_ 'add-card'}}
+            
+template(name="addCardForm")
+  .minicard.minicard-composer.js-composer
+    if getLabels
+      .minicard-labels
+        each getLabels
+          .minicard-label(class="card-label-{{color}}" title="{{name}}")
+    textarea.minicard-composer-textarea.js-card-title(autofocus)
+    if members.get
+      .minicard-members.js-minicard-composer-members
+        each members.get
+          +userAvatar(userId=this)
+
+  .add-controls.clearfix
+    button.primary.confirm(type="submit") {{_ 'add'}}
+    a.fa.fa-times-thin.js-close-inlined-form
+
+template(name="autocompleteLabelLine")
+  .minicard-label(class="card-label-{{colorName}}" title=labelName)
+  span(class="{{#if hasNoName}}quiet{{/if}}")= labelName

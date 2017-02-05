@@ -1,0 +1,17 @@
+template(name="commentForm")
+  #add-comment.status-type.comments
+    span.line.l-comments
+    span.type-box--case.comments Comentarios
+  // comments
+  .SpartugApp--CommunityHacker--CommentsBox
+    .SpartugApp--CommunityHacker--CommentsBox---addComment.new-comment.js-new-comment(class="{{#if commentFormIsOpen}}is-open{{/if}}")
+      +userAvatar(userId=currentUser._id)
+      .SpartugApp--CommunityHacker--CommentsBox---Input
+        form.js-new-comment-form
+          +editor(class="js-new-comment-input")
+            | {{getUnsavedValue 'cardComment' currentCard._id}}
+          .add-controls.SpartugApp--CommunityHacker--CommentsBox---Button 
+            button.comment.disabled--c
+              i.icon-comment 
+            button.primary.confirm.clear.js-add-comment.send(type='submit')
+              i.icon-send

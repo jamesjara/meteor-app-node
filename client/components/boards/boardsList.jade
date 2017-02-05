@@ -1,0 +1,69 @@
+template(name="boardList")
+  .employ
+    //+boardSidebar
+    section.SpartugApp-container--Left
+      .row-responsive.middle.between
+        h5.text-uppercase
+          | Programas de recompensa
+        .Spartug-App--Tabs
+          .Spartug-App--Tabs---container
+            button.Spartug-App--Tabs---button.is-active(data-program='Todos') Todos
+            button.Spartug-App--Tabs---button(data-program='reciente') Más recientes
+            button.Spartug-App--Tabs---button(data-program='destacado') Destacados
+            button.Spartug-App--Tabs---button(data-program='participando') Participando
+   
+        li.js-add-board
+          a.board-list-item.label {{_ 'add-board'}}
+      each boards                
+            .SpartugApp-program(data-program='participando')
+              .SpartugApp-program--wrapper
+                time.SpartugApp-program--item---totalParticipants
+                  span.icon-users2
+                  | a {{ this.memberCount }} Participantes XXXX
+                .SpartugApp-program--item---summaryDetails
+                  a.SpartugApp-program--item---summaryDetails----nameprogram(href="{{pathFor 'board' boardId=this._id}}")
+                    img.SpartugApp-program--item---summaryDetails----avatarprogram(src='{{ program_logo }}', alt='{{ program_name }}')
+                    | {{ program_name }}
+                  span(total-bugs-bbp='0')
+                  span.SpartugApp-program--item---summaryDetails----reward
+                    | {{ program_bounty_minimun }}
+                    i.icon-long-arrow-right
+                    | {{ program_bounty_maximun }}
+                    strong.SpartugApp-program--item---summaryDetails----perbug Por bug
+                .SpartugApp-element--miniPic---bugValidated
+                  .SpartugApp-element--miniPic---AvatarsCenter
+                    each awaredUsers
+                        +userAvatarSimple
+                    span.SpartugApp-element--miniPic---bugValidated----text Últimos Recompensados
+                p.SpartugApp-program--item---summaryDetails----description= program_summary
+              .SpartugApp-program--actions                       
+                if currentUser.isBoardMemberOf _id
+                    a.SpartugApp-program--actions---others.Button--bugReported(href='#')
+                      li.icon-bug
+                        span Reportar
+                    span.SpartugApp-program--actions---others.Check--YesReport(title='Ya has reportado')
+                      li.icon-check-circle
+                else 
+                    a.SpartugApp-program--actions---others.Button--participate(href='#like')
+                      li.icon-gavel
+                        span Participar 
+                    a.SpartugApp-program--actions---others.Check--NoReport(href='#like')
+                      li.icon-check-circle
+                .SpartugApp-program--actions---category
+                  span.icon-shield2
+                  |  #{program_type}  
+      // fin de programas
+  .SpartugApp-container
+    p.SpartugApp-box--descriptionDownText
+      | ¡La comunidad de investigadores de seguridad más grande de Latinoamérica!
+      span
+        | ¿Tienes alguna duda? Escríbirnos a 
+        strong
+          a.SpartugApp-element--Link---line(href='mailto:hola@spartug.com') hola@spartug.com
+
+template(name="boardListHeaderBar")
+  h1 {{_ 'my-boards'}}
+  .board-header-btns.right
+    a.board-header-btn.js-open-archived-board
+      i.fa.fa-archive
+      span {{_ 'archives'}}

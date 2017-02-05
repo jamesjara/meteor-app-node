@@ -1,0 +1,147 @@
+template(name="board")
+  if isBoardReady.get
+    if currentBoard
+      if onlyShowCurrentCard
+        +cardDetails(currentCard)
+      else
+        +boardBody
+    else
+      //- XXX We need a better error message in case the board has been archived
+      +message(label="board-not-found")
+  else
+    +spinner
+
+          
+template(name="boardBody")
+  .employ
+    if isSuperAdmin
+      +sidebar
+    .board-canvas(
+      class="{{#if Sidebar.isOpen}}is-sibling-sidebar-open{{/if}}"
+      class="{{#if MultiSelection.isActive}}is-multiselection-active{{/if}}"
+      class="{{#if draggingActive.get}}is-dragging-active{{/if}}")
+      if showOverlay.get
+        .board-overlay
+      .lists.js-lists
+        each currentBoard.lists 
+          if newCard
+            +addCardFullForm(this)
+          else 
+            +list(this)
+            if currentCardIsInThisList
+              +cardDetails(currentCard)
+        //if currentUser.isBoardMember
+        //  +addListForm
+
+template(name="addListFormOLD")
+  .list.js-list.list-composer.js-list-composer
+    .list-header
+      +inlinedForm(autoclose=false)
+        input.list-name-input.full-line(type="text" placeholder="{{_ 'add-list'}}"
+          autocomplete="off" autofocus)
+        .edit-controls.clearfix
+          button.primary.confirm(type="submit") {{_ 'save'}}
+          a.fa.fa-times-thin.js-close-inlined-form
+      else
+        a.open-list-composer.js-open-inlined-form
+          i.fa.fa-plus
+          | {{_ 'add-list'}}
+
+template(name="addCardFullForm")  
+   if currentUser.isBoardMember
+        .employ
+          // Tabla
+          // fin de tabla
+          section.SpartugApp-container
+            .SpartugApp-element--boxComponeReport.clearfix
+              .SpartugApp-element--boxComponeReport---Define
+                .SpartugApp-element--boxComponeReport---Define----solid
+                  a(href='#url-program')
+                    img.Spartug-App--element--Logo---NewReportBugProgram(src='https://profile-photos.hackerone-user-content.com/production/000/000/228/56557b4dc549f8fac28bbba49d458317f5ddc601_large.png?1402446808', alt='MailChimp')
+                  h5
+                    | Usted está presentando un informe de vulnerabilidad en 
+                    b Mailchimp
+                  .SubmitField-buttonTwo
+                    button.ui-Button--Two ¡Precaución!
+                .SpartugApp-base--defineBox---NewReportForm
+                  .Spartug-App--elementBox---Information.Spartug-App--elementBox---Information----suggestions
+                    h3.Report ¡Sugerencias de efectividad!
+                    ul.Spartug-App--elementBox---InformationDefine
+                      li.Spartug-App--elementBox---InformationDefine----item
+                        span.Spartug-App--elementBox---InformationDefine----item-----BadgeCircle 1
+                        p.Spartug-App--elementBox---InformationDefine----item-----TextTwo
+                          | Proporcionar bastante información como sea posible sobre la vulnerabilidad que ha descubierto.
+                      li.Spartug-App--elementBox---InformationDefine----item
+                        span.Spartug-App--elementBox---InformationDefine----item-----BadgeCircle 2
+                        p.Spartug-App--elementBox---InformationDefine----item-----TextTwo
+                          | Cuanta más información se proporcione, 
+                          strong Mailchimp
+                          |  más rápido será capaz de validar el caso.
+                      li.Spartug-App--elementBox---InformationDefine----item
+                        span.Spartug-App--elementBox---InformationDefine----item-----BadgeCircle 3
+                        p.Spartug-App--elementBox---InformationDefine----item-----TextTwo
+                          | Evite enviar spam o fallos de seguridad invalidos, para no perder su reputación como buen investigador.
+                      li.Spartug-App--elementBox---InformationDefine----item
+                        span.Spartug-App--elementBox---InformationDefine----item-----BadgeCircle 4
+                        p.Spartug-App--elementBox---InformationDefine----item-----TextTwo
+                          | No confies en herramientas de análisis automatizados de vulnerabilidades, rara vez dan buenos resultados.
+                  .row
+                    .column
+                      form(action='', method='post')
+                        .FormField.InputField
+                          label.FormField-label.FormField-label--Principal Estás a punto de mejorar la seguridad de este programa. 
+                          .FormField-controls
+                            input(class='report-title-input', autofocus='true', type='text', placeholder='Ingresar título de informe')
+                          .FormField-description--report
+                            p
+                              | Un título claro y conciso ayuda al oyente a construir un buen marco de referencia.
+                        .FormField.InputField
+                          .FormField-controls
+                            input(autofocus='true', class='report-vulnerabilidad-input', placeholder='URL (ubicación de la vulnerabilidad)', type='text')
+                        .FormField.InputField
+                          label.FormField-label Tipo de vulnerabilidad
+                          .FormField-controls
+                            .item-select
+                              select(class='report-typebug-input')
+                                option(value='', disabled='disabled', selected='selected') Bugs
+                                option(value='xss') Cross-Site Scripting (XSS)
+                                option(value='csrf') Cross-Site Request Forgery (CSRF)
+                                option(value='sqli') SQLi inyección
+                          .FormField-description--report
+                            p Seleccionar el tipo de vulnerabilidad o error que ha descubierto.
+                        .FormField.InputField
+                          label.FormField-label Riesgo de vulnerabilidad
+                          .FormField-controls
+                            .item-select
+                              select(class='report-risk-input')
+                                option(value='', disabled='disabled', selected='selected') Elegir riesgo
+                                option(value='Bajo') Bajo
+                                option(value='Medio') Medio
+                                option(value='Alto') Alto
+                          .FormField-description--report
+                            p
+                              | Define el nivel de riesgo el cual pueden ser afectados los usuarios o el sistema elegido.
+                        .FormField.InputField
+                          .FormField-controls
+                            textarea(class='report-description-input', placeholder='Descripción (Por favor describa en detalle lo que trata esta vulnerabilidad)')
+                        .FormField.InputField
+                          label.FormField-label Prueba de concepto
+                          .FormField-controls
+                            textarea.PoC(class='report-poc-input', placeholder='Escribe las instrucciones precisas paso a paso sobre cómo esta vulnerabilidad puede ser reproducida...')
+                          .FormField-description--report
+                            p La PoC es una de las partes más importantes en el informe.
+                        .FormField.InputField
+                          label.FormField-label Adjuntar imagenes o capturas de pantalla
+                          span.warning
+                          .FormField-controls
+                            .file-upload-wrapper(data-text='Seleccionar imagenes')
+                              input#files.file-upload-field(name='images_report', type='file', value='')
+                          .FormField-description--report
+                            p
+                              | Puedes subir varias imagenes. Por favor, mantena el tamaño de carga maximo con 
+                              strong 2MB
+                              | .
+                        .SubmitField
+                          .SubmitField-button
+                            button.ui-Button(type='submit') Enviar vulnerabilidad
+            // fin de programas

@@ -1,0 +1,142 @@
+<template name="atTextInput2">
+	
+        
+	 {{#if options.extraCls}}
+	 
+    	<input class="input {{options.extraCls}}" type="{{type}}" id="at-field-{{_id}}" name="at-field-{{_id}}" placeholder="{{placeholder}}" autocapitalize="none" autocorrect="off">
+    {{else}}
+    
+	  <div class="at-input {{#if isValidating}}validating{{/if}} {{#if hasError}}has-error{{/if}} {{#if hasSuccess}}has-success{{/if}} {{#if feedback}}has-feedback{{/if}}">
+	    {{#if showLabels}}
+	      <label for="at-field-{{_id}}">
+	        {{displayName}} {{#unless required}}{{optionalText}}{{/unless}}
+	      </label>
+	    {{/if}}
+	    <input class="input" type="{{type}}" id="at-field-{{_id}}" name="at-field-{{_id}}" placeholder="{{placeholder}}" autocapitalize="none" autocorrect="off">
+	    {{#if hasIcon}}
+	        <span class="{{iconClass}}"></span>
+	    {{/if}}
+	    {{#if hasError}}
+	      <span>{{errorText}}</span>
+	    {{/if}}
+  		</div>
+     {{/if}}
+</template>
+
+<template name="atSigninLink2">
+  <div class="at-signin-link">
+  
+  </div>
+</template>
+
+<template name="atSignupLink2">
+	<div class="signup-hint at-signup-link">
+  
+      {{preText}}
+      <a href="{{signUpLink}}" id="at-signUp" class="modalb at-link at-signup {{disabled}}">{{linkText}} >></a>
+      {{suffText}}
+      
+      
+                    </div>
+                    
+</template>
+
+<template name="atPwdLink2">
+	
+      {{preText}}
+      <a href="{{forgotPwdLink}}" id="at-forgotPwd" class="forgot at-link at-pwd {{disabled}}">{{linkText}}</a>
+      {{suffText}}
+	
+</template>
+
+<template name="atForm2">
+  {{#unless hide}}
+    <div class="at-form">
+      {{#if showTitle}}
+        {{> atTitle}}
+      {{/if}}
+      
+      
+      
+      
+       
+                    
+      {{#if showOauthServices}}
+        {{> atOauth}}
+      {{/if}}
+      {{#if showServicesSeparator}}
+        {{> atSep}}
+      {{/if}}
+      {{#if showResult}}
+        {{> atResult}}
+      {{/if}}
+      {{#if showMessage}}
+        {{> atMessage}}
+      {{/if}}
+      {{#if showTermsLink}}
+        {{> atTermsLink}}
+      {{/if}}
+      
+      
+      {{#if showSignInLink}}
+        <h3>Spartug<small>¡Convertirse en un investigador!</small></h3>
+        
+        
+        {{> atSigninLink}}
+      {{/if}}
+      {{#if showSignUpLink}}
+      <h3>Spartug<small>¡Mejora la seguridad en Internet!</small></h3>
+        {{> atSignupLink}}
+        
+      {{/if}}
+      
+      
+      {{#if showError}}
+        {{> atError}}
+      {{/if}}
+      
+      {{#if showPwdForm}}
+        {{> atPwdForm}}
+      {{/if}}
+      {{#if showResendVerificationEmailLink}}
+        {{> atResendVerificationEmailLink}}
+      {{/if}}
+      
+      
+      
+      {{#if showSignInLink}}
+                    <div class="SpartugLanding-box-regsession--Overlay---Modal----separator"><span>Programas de recompensas</span></div>
+                    <a class="boton btn-purple btn-Yellow modale" href="#" data-modal="#program" data-spartug-modal="button">Crear un programa</a>
+                    <div class="signup-hint">¿Ya tienes una cuenta? <a href="#" class="modala" data-modal="#signin" data-spartug-modal="button">Iniciar sesión »</a></div>
+      {{/if}}
+    </div>
+  {{/unless}}
+</template>
+
+
+<template name="atTitle2">
+  
+</template> 
+
+
+<template name="atPwdFormBtn2">
+  <button type="submit" class="boton btn-purple at-btn submit {{submitDisabled}}" id="at-btn">
+    {{buttonText}}
+  </button>
+</template>
+
+<template name="atError2">
+  <div class="at-error">
+    {{#each error}}<span class="error SpartugLanding-sessionAlert logErrorSession-Login">
+      <div class="SpartugLanding-sessionAlert">
+      	<div class="SpartugLanding-sessionAlert--icon">
+      		<i class="icon-envelope"></i>
+      	</div>
+      	<div class="SpartugLanding-sessionAlert--text">
+      		<p>{{errorText}}</p>
+      	</div>
+      </div> </span>
+    {{/each}}
+  </div>
+</template>
+

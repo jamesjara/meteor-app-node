@@ -1,0 +1,129 @@
+template(name="landpage")
+    .SpartugLanding
+      .SpartugLanding-bg
+      .SpartugLanding-badge--beta beta
+      .SpartugLanding-wrapper
+        header.SpartugLanding-wrapper--header
+          .SpartugLanding-wrapper--header---logo
+            h1.SpartugLanding-wrapper--header---logo----text Spartug
+          .SpartugLanding-wrapper--header---menu
+            a.SpartugLanding-wrapper--header---menu----btn.diferent(data-spartug-menu='toggle', href='#')
+              | Más
+            nav(data-spartug-menu='navigation')
+              ul
+                li.SpartugLanding-badge--triangleMenu
+                li.SpartugLanding-line--TopMenu
+                  a(href='acerca-de-nosotros.html') Acerca de nosotros
+                li
+                  a(href='#') Cómo funciona
+                li
+                  a(href='#') Centro de ayuda
+                li.SpartugLanding-line--BottomMenu
+                  a(href='#') Contáctenos
+            a.SpartugLanding-wrapper--header---menu----btn(href='top-hacker.html')
+              | Top Hacker
+            a.SpartugLanding-wrapper--header---menu----btn(href='#')
+              | Programas
+            a.SpartugLanding-wrapper--header---menu----btn(href='#')
+              | Servicios
+        section.SpartugLanding-descriptions
+          h2.SpartugLanding-text--RandomEntities
+            span.icon-shield2
+            |  Organizaciones
+          h2.SpartugLanding-descriptions--one
+            | Entidades e investigadores
+            // <span class="typed-cursor">_</span>
+          h3.SpartugLanding-descriptions--two
+            | Ecosistema efectivo en control de vulnerabilidades y gestión en pruebas de seguridad mediante programas de recompensas.
+        // <img class="SpartugLanding-principallogo ninja-animation" src="logo-shadow.svg" alt="Logo onorze">
+        #SpartugLanding-principallogo--WithParticles.ninja-animation
+        section.SpartugLanding-box-regenterprise
+          form.validate(action='#', method='post', target='_blank', novalidate='')
+            .SpartugLanding-box-regenterprise--BoxInput
+              input#insertNameProgram.SpartugLanding-box-regenterprise--BoxInput---unique(type='text', name='program', placeholder='Ingresar nombre de empresa', required='')
+            input.SpartugLanding-btn.SpartugLanding-btn--ApplyBugbp.btn-Yellow.modalf(type='submit', value='Aplicar', data-modal='#program', data-spartug-modal='button')
+        section.SpartugLanding-box-regsession
+          h4.SpartugLanding-box-regsession-textCrowdsource
+            | Interesado en la seguridad 
+            a.SpartugLanding-box-regsession-textCrowdsource--InfoLink(href='https://es.wikipedia.org/wiki/Crowdsourcing', target='_blank') crowdsourcing
+            | ? 
+            span Es fácil empezar.
+          a.SpartugLanding-btn.SpartugLanding-box-regsession--btn.btn-Green.modala(href='#', data-modal='#signin', data-spartug-modal='button')
+            span.icon-terminal.icon--space
+            |         Iniciar sesión
+          a.SpartugLanding-btn.SpartugLanding-box-regsession--btn.btn-Blue.modalb(href='#', data-modal='#signup', data-spartug-modal='button')
+            span.icon-globe.icon--space
+            |         Registrarse
+          .SpartugLanding-box-regsession--Overlay
+            .SpartugLanding-box-regsession--Overlay---Modal
+              .SpartugLanding-box-regsession--Overlay---Modal----close
+                i.icon-times
+              .SpartugLanding-box-regsession--Overlay---Modal----box.relative
+          .SpartugLanding-box--hide
+            #program
+              {{> atForm program='true' state='signUp'}}
+            #signup
+              {{> atForm state='signUp'}}
+            #signin
+              {{> atForm state='signIn'}}
+            #forgot
+              form(action='', method='post')
+                h3
+                  | Spartug
+                  small Te enviaremos un enlace de restablecimiento.
+                span.logErrorSession-Recover
+                input#email.input(type='email', name='email', placeholder='Correo electrónico')
+                button.boton.btn-purple(onclick='return ValidateRecover();') Restablecer
+            #information
+              form(action='#', method='post')
+                h3
+                  | Spartug
+                  small ¡Usted está en una buena compañía!
+                a.SpartugLanding-box-regsession--Overlay---Modal----btnBackInfo.modalf(href='#', data-modal='#program', data-spartug-modal='button')
+                  span.icon-angle-double-left
+                  |  Regresar
+                .SpartugLanding-box-regsession--Overlay---Modal----separator
+                  span Tu organización
+                p.SpartugLanding-box-regsession--Overlay---Modal----p
+                  | Te permite crear y ejecutar tus propios programas de seguridad para la multitud de investigadores.
+                .SpartugLanding-box-regsession--Overlay---Modal----separator
+                  span Tu cuenta
+                p.SpartugLanding-box-regsession--Overlay---Modal----p
+                  | Se utiliza cuando se responde a los investigadores y en la validación de los informes.
+                .SpartugLanding-box-regsession--Overlay---Modal----separator
+                  span Pruebas de penetración
+                p.SpartugLanding-box-regsession--Overlay---Modal----p
+                  | En las pruebas de penetración típicas, se utilizan los mismos métodos, las personas utilizando escáneres una vez más. Lo peor de todo, usted está pagando por una prueba que no podria producir ningún resultado. Con 
+                  strong Spartug
+                  | , usted sólo paga por las vulnerabilidades validas, no por el esfuerzo necesario para encontrarlas.
+            #feedback
+              form(action='#', method='post')
+                h3
+                  | Feedback
+                  small ¿Qué te gustaría compartir con nosotros?
+                span.logErrorSession-Feedback
+                input#email.input(type='email', name='emailfeedback', max='25', placeholder='Ingresar tu correo electrónico')
+                textarea#feedback.input(placeholder='Escribe tu feedback...', name='feedback', max='1000')
+                button.boton.btn-purple(onclick='return ValidateFeedback();') Enviar
+        footer.SpartugLanding-footer
+          .SpartugLanding-footer--copyright
+            i.icon-copyright
+            |  2016 
+            a.SpartugLanding-footer--link(href='#') Spartug
+            span.SpartugLanding-footer--separator |
+            a.SpartugLanding-footer--link(href='#', target='_blank', title='Políticas de Privacidad') Privacidad
+            span.SpartugLanding-footer--separator |
+            a.SpartugLanding-footer--link(href='#', target='_blank', title='Términos y Condiciones') Términos de servicio
+            span.SpartugLanding-footer--separator |
+            a.SpartugLanding-footer--link(href='#', target='_blank', title='Comuniquese con nosotros') Contáctenos
+          .SpartugLanding-footer--box
+            .SpartugLanding-footer--box---define
+              h3.SpartugLanding-footer--box---define----text ¡Seamos amigos!
+              a.SpartugLanding-footer--box---define----twitter(href='https://twitter.com/spartug', title='Seguir en Twitter')
+              a.SpartugLanding-footer--box---define----facebook(href='https://www.facebook.com/spartug', title='Seguir en Facebook')
+              a.SpartugLanding-footer--box---define----linkedin(href='https://www.linkedin.com/company/spartug', title='Seguir en Linkedin')
+        .SpartugLanding-btn--Feedback(data-modal='#feedback', data-spartug-modal='button')
+          i
+            svg(viewbox='-300 -340 1200 1200', enable-background='0 0 50 50')
+              path.fill(d='M512 214.628c0-100.463-29.396-181.969-65.741-182.613 0.146-0.003 0.289-0.015 0.436-0.015h-41.471c0 0-97.4 73.168-237.615 101.877-4.28 22.646-7.015 49.637-7.015 80.751s2.733 58.104 7.015 80.75c140.214 28.709 237.615 101.878 237.615 101.878h41.471c-0.146 0-0.289-0.012-0.436-0.016 36.348-0.644 65.741-82.149 65.741-182.612zM432.412 369.626c-4.691 0-9.766-4.871-12.373-7.774-6.315-7.032-12.396-17.98-17.594-31.664-11.628-30.616-18.033-71.655-18.033-115.562 0-43.905 6.405-84.945 18.033-115.561 5.197-13.684 11.281-24.633 17.594-31.664 2.607-2.906 7.682-7.776 12.373-7.776s9.768 4.872 12.372 7.776c6.317 7.032 12.398 17.979 17.594 31.664 11.629 30.615 18.034 71.656 18.034 115.561 0 43.902-6.405 84.944-18.034 115.562-5.195 13.684-11.281 24.632-17.594 31.664-2.604 2.903-7.68 7.774-12.372 7.774zM125.906 214.628c0-25.975 1.905-51.215 5.526-74.547-23.686 3.277-44.471 5.162-70.17 5.162-33.529 0-33.529 0-33.529 0l-27.733 47.343v44.085l27.73 47.343c0 0 0 0 33.53 0 25.699 0 46.484 1.887 70.17 5.162-3.618-23.332-5.524-48.573-5.524-74.548zM184.075 321.086l-63.999-12.255 40.921 160.772c2.118 8.317 10.372 12.519 18.343 9.327l59.278-23.726c7.972-3.188 11.164-11.982 7.098-19.542l-61.641-114.576zM432.412 274.365c-1.809 0-3.764-1.877-4.769-2.996-2.435-2.71-4.778-6.93-6.781-12.204-4.481-11.8-6.95-27.617-6.95-44.539s2.469-32.739 6.95-44.539c2.003-5.274 4.348-9.494 6.781-12.204 1.005-1.12 2.96-2.997 4.769-2.997 1.808 0 3.765 1.878 4.769 2.997 2.435 2.71 4.778 6.929 6.78 12.204 4.482 11.799 6.951 27.617 6.951 44.539 0 16.921-2.469 32.739-6.951 44.539-2.002 5.274-4.348 9.494-6.78 12.204-1.004 1.119-2.96 2.996-4.769 2.996z')
+          .SpartugLanding-btn--Feedback---title Feedback

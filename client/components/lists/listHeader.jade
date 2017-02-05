@@ -1,0 +1,54 @@
+template(name="listHeader")
+    .SpartugApp-ProfileProgram--contentInner
+      if isSuperAdmin
+       a.list-header-menu-icon.fa.fa-navicon.js-open-list-menu  a
+      // Numero de Programa
+      span.SpartugApp-ProfileProgram--numberCodeProgram #NP1
+          if currentUser.isBoardMember
+           if isWatching
+                i.list-header-watch-icon.fa.fa-eye
+      .SpartugApp-ProfileProgram--boxPrincipal
+        img.SpartugApp-ProfileProgram--boxPrincipal---Logo(src='{{ program_logo }}', alt='{{ program_name }}')
+        .SpartugApp-ProfileProgram--boxPrincipal---Information
+          h1.SpartugApp-ProfileProgram--boxPrincipal---Information----Name {{ title }}  
+          p.SpartugApp-ProfileProgram--boxPrincipal---Information----Description
+            span Enviar correos electrónicos y seguimiento de resultados de marketing.
+          ul.SpartugApp-ProfileProgram--boxPrincipal---Information----Links
+            li
+              i.icon-globe
+              a(href='https://mailchimp.com', rel='nofollow', target='_blank') mailchimp.com
+            li
+              i.icon-twitter
+              a(href='https://twitter.com/mailchimp', rel='nofollow', target='_blank') @mailchimp
+          span.SpartugApp-ProfileProgram--boxPrincipal---Information----categoryProgram
+            span.icon-shield2
+            |  Organización 
+
+
+template(name="editListTitleForm")
+  .list-composer
+    input.list-name-input.full-line(type="text" value=title autofocus)
+    .edit-controls.clearfix
+      button.primary.confirm(type="submit") {{_ 'save'}}
+      a.fa.fa-times-thin.js-close-inlined-form
+
+template(name="listActionPopup")
+  ul.pop-over-list
+    li: a.js-toggle-watch-list {{#if isWatching}}{{_ 'unwatch'}}{{else}}{{_ 'watch'}}{{/if}}
+  hr
+  ul.pop-over-list
+    li: a.js-add-card {{_ 'add-card'}}
+    if cards.count
+      li: a.js-select-cards {{_ 'list-select-cards'}}
+  hr
+  ul.pop-over-list
+    li: a.js-close-list {{_ 'archive-list'}}
+
+template(name="boardLists")
+  ul.pop-over-list
+    each currentBoard.lists
+      li
+        if($eq ../_id _id)
+          a.disabled {{title}} ({{_ 'current'}})
+        else
+          a.js-select-list= title

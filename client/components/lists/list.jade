@@ -1,0 +1,8 @@
+template(name='list')
+  section.SpartugApp-container
+    .SpartugApp-ProfileProgram.wrap
+      .SpartugApp-ProfileProgram--content
+        .list.js-list(id="js-list-{{_id}}")
+          +listHeader
+          +listBody
+      +listBodyAside

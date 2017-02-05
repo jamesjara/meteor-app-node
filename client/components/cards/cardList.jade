@@ -1,0 +1,50 @@
+template(name='cardList')
+  .employ
+      // fin de tabla
+      section.SpartugApp-container
+        .row-responsive.middle.between
+          h5.text-uppercase Tus reportes de vulnerabilidad
+          .Spartug-App--Tabs
+            .Spartug-App--Tabs---container
+              button.Spartug-App--Tabs---button.is-active(data-program='Todos') En espera
+              button.Spartug-App--Tabs---button(data-program='reciente') Válidos
+              button.Spartug-App--Tabs---button(data-program='destacado') No validos
+              button.Spartug-App--Tabs---button(data-program='destacado') Duplicados
+        // inicio:Actividad de recompensas id:345
+        ol.SpartugApp-define--hackerReports
+          section.SpartugApp-element--hackerRepors
+            header.SpartugApp-element--hackerRepors---Header
+              h3.SpartugApp-element--hackerRepors---counter----totalReports {{ currentUser.reportsCount }} reportes
+              .Actions-result
+                .Actions-result--bugsInvalid
+                  span.starCount 0
+                  span.highlight.icon-bug
+                .Actions-result--bugsValid
+                  span.starCount 0
+                  span.highlight.icon-bug
+            section.SpartugApp-element--hackerRepors----report
+              each cards 
+                  article.SpartugApp-element--hackerRepors---report----item
+                    a.SpartugApp-element--hackerRepors---report----itemLinkReport(href="{{pathFor 'card' boardId=boardId slug='ss' cardId=_id}}")
+                    .SpartugApp-element--hackerRepors---report----itemTypeStatus.box-ColorWaiting
+                      img.SpartugApp-user--reportsHackers---LogoProgram(src='https://profile-photos.hackerone-user-content.com/production/000/000/177/45c11ab6339e6638918dcee97e3db9cc41b2f19c_large.png?1398764641', alt='Detectify')
+                    .SpartugApp-element--hackerRepors---report----itemContent
+                      .MaterialContent-row1
+                        h3.SpartugApp-element--hackerRepors---report----itemContent-title  {{ title }}
+                        figure.SpartugApp-element--hackerRepors---report----itemContent-status
+                          span.SpartugApp-element--hackerRepors---report----itemContent-tag.waiting En espera
+                          .reward
+                            p.reward
+                              strong 0
+                              |  Puntos
+                          span.SpartugApp-ViewReports--numberCodeProgram #R34
+                      .MaterialContent-row2
+                        .SpartugApp-element--hackerRepors---report----itemContent-time
+                          time.SpartugApp-element--hackerRepors---report----itemContent-timeDefine
+                            strong.icon-clock-o
+                            |  hace 3 minutos
+                        .partugApp-element--hackerRepors---report----itemContent-actions
+                          .Actions-result
+                            span.starCount 1
+                            span.highlight.icon-comment 
+ 
