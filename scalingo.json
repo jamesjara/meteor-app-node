@@ -1,7 +1,7 @@
 {
   "name": "spartug",
-  "description": "The open-source Trello-like kanban (build with Meteor)",
-  "repository": "https://github.com/spartug/spartug/",
+  "description": "The open-source spartug (build with Meteor)",
+  "repository": "https://github.com/jamesjara/meteor-app-node/",
   "logo": "https://raw.githubusercontent.com/spartug/spartug/master/meta/icons/spartug-150.png",
   "website": "https://spartug.io",
   "addons": ["scalingo-mongodb"]
