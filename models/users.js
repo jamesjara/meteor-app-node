@@ -44,9 +44,13 @@ Users.attachSchema(new SimpleSchema({
     },
   },
   'profile.avatarUrl': {
-    type: String,
-    optional: true,
-  },
+	    type: String,
+	    optional: true,
+	  },
+	  program: {
+		    type: String,
+		    optional: true,
+		  },
   'profile.emailBuffer': {
     type: [String],
     optional: true,
@@ -80,10 +84,14 @@ Users.attachSchema(new SimpleSchema({
     optional: true,
   },
   services: {
-    type: Object,
-    optional: true,
-    blackbox: true,
-  },
+	    type: Object,
+	    optional: true,
+	    blackbox: true,
+	  },
+	  program: {
+		    type: String,
+		    optional: true
+		  },
   heartbeat: {
     type: Date,
     optional: true,
@@ -419,13 +427,13 @@ if (Meteor.isServer) {
     incrementBoards(_.difference(newIds, oldIds), +1);
   });
 
+  */
   const fakeUserId = new Meteor.EnvironmentVariable();
   const getUserId = CollectionHooks.getUserId;
   CollectionHooks.getUserId = () => {
     return fakeUserId.get() || getUserId();
   };
-  
-  */
+   
 
   /* only programns can insert boards
    Users.after.insert((userId, doc) => {
@@ -449,4 +457,60 @@ if (Meteor.isServer) {
     });
   }); 
   */
+  
+  Users.after.insert((userId, doc) => {
+
+
+  	console.log("sssssssssss-1", doc.program );
+	  if(doc.program){
+	    const fakeUser = {
+	      extendAutoValueContext: {
+	        userId: doc._id,
+	      },
+	    };
+
+	    fakeUserId.withValue(doc._id, () => {
+	    	 
+var title= doc.program;
+ 
+
+	    var boardId = Boards.insert({  
+	        "title" : title,
+	        "permission" : "public", 
+	        "slug" : title.replace(' ',''), 
+	        "archived" : false,        
+	        "stars" : 0, 
+	        "labels" : [ 
+	            { "color" : "green", "_id" : "bLp7za", "name" : "" }, 
+	            { "color" : "yellow", "_id" : "pELcTf", "name" : "" }, 
+	            { "color" : "orange", "_id" : "zGsrGi", "name" : "" }, 
+	            { "color" : "red", "_id" : "SxtpmT", "name" : "" }, 
+	            { "color" : "purple", "_id" : "GQfs4A", "name" : "" }, 
+	            { "color" : "blue", "_id" : "KrXgbh", "name" : "" } 
+	            ], 
+	        "color" : "belize",
+	        "permission": "public",
+	        "program_name": title,
+	        "program_logo": "https://profile-photos.hackerone-user-content.com/production/000/000/177/45c11ab6339e6638918dcee97e3db9cc41b2f19c_large.png?1398764641",
+	        "program_total_bugs": "567567",
+	        "program_bounty_minimun": "000",
+	        "program_bounty_maximun": "111",
+	        "title": "title",
+	        "description": "title",
+	        "program_summary": "program_summary",
+	        "program_type": "program_type",
+	        "program_url" : title.replace(' ','')
+	      
+	    }, fakeUser);
+
+	   
+
+  
+	    
+	    
+	    
+	    });
+	  }
+ }); 
+  
 }

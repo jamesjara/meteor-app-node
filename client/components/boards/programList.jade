@@ -1,0 +1,93 @@
+template(name="programList")
+    .employ
+      each boards  
+          // Tabla
+          // fin de tabla
+          section.SpartugApp-container
+            .SpartugApp-element--boxComponeReport.clearfix
+              .SpartugApp-element--boxComponeReport---Define2
+                .SpartugApp-element--boxComponeReport---Define----solid
+                  a(href='#url-program')
+                    img.Spartug-App--element--Logo---NewReportBugProgram(src='{{ program_logo }}', alt='')
+                  h5
+                    | Este es su programa
+                    b {{ program_name }} 
+          // Aqui un nuevo cuadro
+          .content-right
+            .boxed-ranking--static
+              .wrapper-rk
+                span.titleBox Spartug pago 3000 dolares por un bug
+          // Fin del cuadro
+          section.SpartugApp-container
+            .row-responsive.middle.between
+              h5.text-uppercase
+                span.icon-bar-chart
+                |  Estadisticas
+                // <span class="SpartugApp-badge--totalPrograms">0</span>
+            .row
+              .Box-stats--define.Box-stats--define---elementColor----bug
+                i.icon-bug
+                span.Box-stats--define---titleType Bugs
+                span.Box-stats--define---value
+                  a(href='/reports')
+                    | {{ this.bugsCount }}
+              .Box-stats--define.Box-stats--define---elementColor----participants
+                i.icon-users2
+                span.Box-stats--define---titleType Participantes
+                span.Box-stats--define---value
+                  span {{ this.memberCount }}
+              .Box-stats--define.Box-stats--define---elementColor----payments
+                i.icon-usd
+                span.Box-stats--define---titleType Pagos
+                span.Box-stats--define---value
+                  span 800 BHC
+              .Box-stats--define.Box-stats--define---elementColor----views
+                i.icon-eye2
+                span.Box-stats--define---titleType Visitantes
+                span.Box-stats--define---value
+                  span 174
+            +addProgramFullForm
+
+template(name="programListHeaderBar") 
+
+
+
+template(name="addProgramFullForm")
+                .SpartugApp-base--defineBox---NewReportForm2
+                  .row
+                    .column(style="width:100%")
+                      form(action='', method='post')
+                        .FormField.InputField
+                          label.FormField-label.FormField-label--Principal Estás a punto de mejorar la seguridad de este programa.  
+                          
+                        .FormField.InputField
+                          .FormField-controls
+                            input(autofocus='true', class='report-program_name-input',  value="{{program_name}}" , placeholder='completa el campo', type='text')
+                          
+                        .FormField.InputField
+                          .FormField-controls
+                            input(autofocus='true', class='report-program_logo-input',  value="{{program_logo}}" , placeholder='completa el campo', type='text')
+                          
+                        .FormField.InputField
+                          .FormField-controls
+                            textarea(autofocus='true', class='report-description-input',  value="" , placeholder='completa el campo', type='text')
+                              | {{description}}
+                          
+                        .FormField.InputField
+                          .FormField-controls
+                            input(autofocus='true', class='report-program_summary-input',  value="{{program_summary}}" , placeholder='completa el campo', type='text')
+                          
+                        .FormField.InputField
+                          .FormField-controls
+                            input(autofocus='true', class='report-program_type-input',  value="{{program_type}}" , placeholder='completa el campo', type='text')
+                          
+                        .FormField.InputField
+                          .FormField-controls
+                            input(autofocus='true', class='report-program_url-input',  value="{{program_url}}" , placeholder='completa el campo', type='text') 
+                            
+ 
+                        .SubmitField
+                          .SubmitField-button
+                            button.ui-Button(type='submit') Actualizar programa
+                            
+                            

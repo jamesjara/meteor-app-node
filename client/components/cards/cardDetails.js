@@ -24,6 +24,7 @@ BlazeComponent.extendComponent({
   },
 
   isWatching() {
+	  return;
     const card = this.currentData();
     return card.findWatcher(Meteor.userId());
   },

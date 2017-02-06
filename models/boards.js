@@ -9,12 +9,15 @@ Boards.attachSchema(new SimpleSchema({
 		  },
 		  program_total_bugs: {
 		    type: String,
+		    optional: true,
 		  },
 		  program_bounty_minimun: {
 		    type: String,
+		    optional: true,
 		  },
 		  program_bounty_maximun: {
 		    type: String,
+		    optional: true,
 		  },
 		  program_summary: {
 		    type: String,
@@ -24,7 +27,7 @@ Boards.attachSchema(new SimpleSchema({
 		    type: String,
 		  },
 		  title: {
-		    type: String,
+		    type: String, 
 		  },
 		  program_url: {
 		    type: String,
@@ -209,6 +212,7 @@ Boards.helpers({
   },
   
   cards() {
+	  console.log("cards() boards.js" , this._id);
 	    return Cards.find({ boardId: this._id, archived: false }, { sort: { sort: 1 }});
   },
 
@@ -234,6 +238,10 @@ Boards.helpers({
 
   memberCount() {
     return  this.memberUsers().count();
+  },
+
+  bugsCount() {
+    return  this.memberCount();
   },
   
   getLabel(name, color) {
@@ -293,6 +301,10 @@ Boards.mutations({
   setDesciption(description) {
     return { $set: {description} };
   },
+  
+  updateForm(data) {
+	    return data;
+	  },
 
   setColor(color) {
     return { $set: { color }};
@@ -392,7 +404,7 @@ Boards.mutations({
 if (Meteor.isServer) {
   Boards.allow({
     insert: Meteor.userId,
-    update: allowIsHackerRole,
+    update: allowIsBoardAdminOrHacker ,
     remove: allowIsBoardAdmin,
     fetch: ['members'],
   });

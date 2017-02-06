@@ -12,11 +12,15 @@ BlazeComponent.extendComponent({
     // unfortunatly, Blaze doesn't have this notion.
     this.autorun(() => {
       const currentBoardId = Session.get('currentBoard');
+      
+      console.log("currentBoardId" , currentBoardId);
       if (!currentBoardId)
         return;
       const handle = subManager.subscribe('board', currentBoardId);
       Tracker.nonreactive(() => {
         Tracker.autorun(() => {
+            
+            console.log("currentBoardId  Tracker.autoru");
           this.isBoardReady.set(handle.ready());  
         });
       });
@@ -36,7 +40,10 @@ BlazeComponent.extendComponent({
     this.childComponents('addListForm')[0].open();
   },
  
-  currentCardIsInThisList() {
+  currentCardIsInThisList() { 
+	 
+	  console.log("currentCardIsInThisList");
+	  
     const currentCard = Cards.findOne(Session.get('currentCard'));
     const listId = this.currentData()._id;
     return currentCard && currentCard.listId === listId;

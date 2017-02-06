@@ -3,7 +3,7 @@ Meteor.publish('card', function(cardId) {
 		    return [];
 	  
   check(cardId, String);
-  return Cards.find({ _id: cardId ,  userId: this.userId });
+  //return Cards.find({ _id: cardId ,  userId: this.userId });
 });
 
 Meteor.publish('myCards',  function() {
@@ -15,3 +15,10 @@ Meteor.publish('myCards',  function() {
 	   });
 	});
 
+
+Meteor.publish('myProgramCards',  function() {
+ 
+	  return Cards.find({
+		  //userId: this.userId
+	   });
+	});

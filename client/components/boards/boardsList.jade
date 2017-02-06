@@ -11,9 +11,7 @@ template(name="boardList")
             button.Spartug-App--Tabs---button(data-program='reciente') Más recientes
             button.Spartug-App--Tabs---button(data-program='destacado') Destacados
             button.Spartug-App--Tabs---button(data-program='participando') Participando
-   
-        li.js-add-board
-          a.board-list-item.label {{_ 'add-board'}}
+    
       each boards                
             .SpartugApp-program(data-program='participando')
               .SpartugApp-program--wrapper

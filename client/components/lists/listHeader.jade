@@ -8,11 +8,11 @@ template(name="listHeader")
            if isWatching
                 i.list-header-watch-icon.fa.fa-eye
       .SpartugApp-ProfileProgram--boxPrincipal
-        img.SpartugApp-ProfileProgram--boxPrincipal---Logo(src='{{ program_logo }}', alt='{{ program_name }}')
+        img.SpartugApp-ProfileProgram--boxPrincipal---Logo(src='{{ board.program_logo }}', alt='{{ board.program_name }}')
         .SpartugApp-ProfileProgram--boxPrincipal---Information
-          h1.SpartugApp-ProfileProgram--boxPrincipal---Information----Name {{ title }}  
+          h1.SpartugApp-ProfileProgram--boxPrincipal---Information----Name {{ board.program_name }}  
           p.SpartugApp-ProfileProgram--boxPrincipal---Information----Description
-            span Enviar correos electrónicos y seguimiento de resultados de marketing.
+            span {{ program_summary }}
           ul.SpartugApp-ProfileProgram--boxPrincipal---Information----Links
             li
               i.icon-globe
@@ -22,7 +22,7 @@ template(name="listHeader")
               a(href='https://twitter.com/mailchimp', rel='nofollow', target='_blank') @mailchimp
           span.SpartugApp-ProfileProgram--boxPrincipal---Information----categoryProgram
             span.icon-shield2
-            |  Organización 
+            |  {{ board.program_type }}   
 
 
 template(name="editListTitleForm")

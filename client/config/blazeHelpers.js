@@ -26,5 +26,5 @@ Blaze.registerHelper('concat', function (...args) {
 
 
 Blaze.registerHelper('isSuperAdmin', function() {
-	   return true;
+	   return false;
  });

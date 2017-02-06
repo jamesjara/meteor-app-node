@@ -10,7 +10,7 @@ const sandstormBoard = {
   _id: 'sandstorm',
 
   // XXX Should be shared with the grain instance name.
-  title: 'Wekan',
+  title: 'spartug',
   slug: 'libreboard',
   members: [],
 

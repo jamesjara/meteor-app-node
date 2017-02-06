@@ -30,8 +30,8 @@ AccountsTemplates.addFields([ {
 	}, emailField, passwordField]);
 
 AccountsTemplates.configure({
-	defaultLayout: 'landpage',
-	 // defaultLayout: 'userFormsLayout',
+	 // 	defaultLayout: 'landpage',
+	  defaultLayout: 'userFormsLayout',
   
   defaultContentRegion: 'content',
   confirmPassword: false,
@@ -72,10 +72,26 @@ AccountsTemplates.configureRoute('changePwd', {
 
 if (Meteor.isServer) {
 	var mySubmitFunc = function(userId, info) {
-		  if (userId) {
-			Roles.addUsersToRoles(userId, ['hacker','profile','participant','report']); 	
-			Roles.addUsersToRoles([userId], ['hacker','profile','participant','report']); 		
-		  }
+		 if (userId) {
+		 if(info &&  info.profile && info.profile.program ){ 
+	 
+					Roles.addUsersToRoles(userId, ['program']); 	
+					Roles.addUsersToRoles([userId], ['program']);
+					
+ 
+					 
+					 
+					
+				 
+		 } else {  
+					Roles.addUsersToRoles(userId, ['hacker','profile','participant','report']); 	
+					Roles.addUsersToRoles([userId], ['hacker','profile','participant','report']); 		
+					 
+			
+					
+		 }
+		 }
+		 
 		};
 
 		AccountsTemplates.configure({
@@ -96,4 +112,16 @@ if (Meteor.isServer) {
       }, user.getLanguage());
     };
   });
+  
+  
+  Accounts.onCreateUser(function(options, user){ 
+
+		 if(options &&  options.profile && options.profile.program ){ 
+			    user.program =   options.profile.program ; 
+		 } 
+		// console.log("anets de ss?",options, user);
+		 
+		 
+	    return user;
+	});
 }

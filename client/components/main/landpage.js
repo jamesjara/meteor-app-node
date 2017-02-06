@@ -58,7 +58,7 @@ Template.landpage.onRendered(() => {
 		});
 	}
 	LandingMenus();
-	alert("ssss");
+	
 	particlesJS("SpartugLanding-principallogo--WithParticles", {
 		"particles": {
 			"number": {
@@ -358,7 +358,7 @@ Template.landpage.events({
 		e.preventDefault();
 		$('.SpartugLanding-box-regsession--Overlay---Modal').removeClass('active');
 		setTimeout(function() {
-			alert("ssss");
+			
 			$('.SpartugLanding-box-regsession--Overlay---Modal .SpartugLanding-box-regsession--Overlay---Modal----box').html($('#signup'));
 			$('#at-field-program').val("1337");
 			$('#at-field-program').hide();
@@ -415,8 +415,7 @@ Template.landpage.events({
 	},
 	'ol': function(event) {
 		event.preventDefault();
-		return false;
-		alert("xxxx");
+		return false; 
 		var emailVar = event.target.loginEmail.value;
 		var passwordVar = event.target.loginPassword.value;
 	}

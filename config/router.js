@@ -3,7 +3,7 @@ FlowRouter.triggers.exit([({path}) => {
   previousPath = path;
 }]);
 
-isSuperAdmin = true;
+isSuperAdmin = false;
 
 
 FlowRouter.route('/', {
@@ -16,10 +16,25 @@ FlowRouter.route('/', {
 
     Filter.reset();
     EscapeActions.executeAll();
+    Tracker.autorun(function() { 
+    var hasProgram =  Meteor.user();
 
-    BlazeLayout.render('defaultLayout', {
-      headerBar: 'boardListHeaderBar',
-      content: 'boardList',
+    if(Meteor.user()){ 
+        //console.log("hasProgram", Roles.userIsInRole(Meteor.user()._id, ['program']) );
+    	 if(Roles.userIsInRole(Meteor.user()._id, ['program'])){
+		        BlazeLayout.render('defaultLayout', {
+		            headerBar: 'programListHeaderBar',
+		            content: 'programList',
+		        });  
+    	 } else {
+		        BlazeLayout.render('defaultLayout', {
+		            headerBar: 'boardListHeaderBar',
+		            content: 'boardList',
+		        });     	
+		    }
+    }
+    	 
+    
     });
   },
 });
@@ -27,14 +42,36 @@ FlowRouter.route('/', {
 FlowRouter.route('/reports', {
   name: 'cards',
   action(params) { 
- 	Session.set('module', 'reports'); 
-    BlazeLayout.render('defaultLayout', {
-      //headerBar: 'boardHeaderBar',
-      content: 'cardList',
-    });
+	  
+	  
+	    Tracker.autorun(function() { 
+	        var hasProgram =  Meteor.user();
+
+	        if(Meteor.user()){ 
+	            //console.log("hasProgram", Roles.userIsInRole(Meteor.user()._id, ['program']) );
+	        	 if(Roles.userIsInRole(Meteor.user()._id, ['program'])){
+	        		 	Session.set('module', 'program-reports'); 
+	        		    BlazeLayout.render('defaultLayout', {
+	        		      //headerBar: 'boardHeaderBar',
+	        		      content: 'cardProgramList',
+	        		    });  
+	        	 } else {
+	        		 	Session.set('module', 'reports'); 
+	        		    BlazeLayout.render('defaultLayout', {
+	        		      //headerBar: 'boardHeaderBar',
+	        		      content: 'cardList',
+	        		    });  	
+	    		    }
+	        }
+	        	 
+	        
+	        });
+	    
+	    
+
   },
 });
-
+ 
 
 FlowRouter.route('/:boardId/:tab?', {
   name: 'board',
@@ -104,6 +141,8 @@ FlowRouter.route('/report/:boardId/:slug/:cardId', {
   action(params) {
     EscapeActions.executeUpTo('inlinedForm'); 
 
+    console.log("/report/:boardId/:slug/:cardId" , params);
+    
     Session.set('currentBoard', params.boardId);
     Session.set('currentCard', params.cardId);
  	Session.set('module', 'card');
