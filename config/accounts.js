@@ -30,8 +30,8 @@ AccountsTemplates.addFields([ {
 	}, emailField, passwordField]);
 
 AccountsTemplates.configure({
-	 // 	defaultLayout: 'landpage',
-	  defaultLayout: 'userFormsLayout',
+		defaultLayout: 'landpage',
+		 //   defaultLayout: 'userFormsLayout',
   
   defaultContentRegion: 'content',
   confirmPassword: false,
