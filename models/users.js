@@ -460,9 +460,9 @@ if (Meteor.isServer) {
   
   Users.after.insert((userId, doc) => {
 
-
+console.log(doc);
   	console.log("sssssssssss-1", doc.program );
-	  if(doc.program){
+	  if(doc.program && doc.program !="1337"){
 	    const fakeUser = {
 	      extendAutoValueContext: {
 	        userId: doc._id,

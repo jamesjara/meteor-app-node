@@ -73,8 +73,10 @@ AccountsTemplates.configureRoute('changePwd', {
 if (Meteor.isServer) {
 	var mySubmitFunc = function(userId, info) {
 		 if (userId) {
-		 if(info &&  info.profile && info.profile.program ){ 
+		 if(info &&  info.profile && info.profile.program && info.profile.program!="1337"){ 
 	 
+			 
+			 
 					Roles.addUsersToRoles(userId, ['program']); 	
 					Roles.addUsersToRoles([userId], ['program']);
 					
